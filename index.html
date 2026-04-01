@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenGaPpa | Soluciones digitales simples para hacer crecer tu negocio</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0b1f33;
+            --primary-mid: #1e4a6b;
+            --primary-light: #2e6f95;
+            --primary-accent: #4da3ff;
+
+            --primary-gold: #f39c12;
+
+            --white: #ffffff;
+            --gray-bg: #f4f7fb;
+        }
+        html {
+            scroll-padding-top: 80px;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1e2a36;
+            background: linear-gradient(180deg, #f4f7fb 0%, #eaf2f8 100%);
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0b1f33 0%, #1e4a6b 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .navbar-brand span {
+            color: var(--primary-gold);
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-gold) !important;
+        }
+        .hero {
+                background: linear-gradient(135deg, #0b1f33 0%, #1e4a6b 50%, #2e6f95 100%);
+                color: white;
+                
+                /* 🔥 CLAVE: altura consistente */
+                min-height: 90vh;
+
+                /* 🔥 CLAVE: centrado vertical */
+                display: flex;
+                align-items: center;
+                
+                padding: 100px 0;
+                position: relative;
+                overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #1e4a6b, #2e6f95);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(30, 74, 107, 0.3);
+        }
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            color: white;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0f2b3d;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--accent-orange));
+            border-radius: 3px;
+        }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #5a6e7c;
+            margin-bottom: 3rem;
+        }
+        .service-card {
+            border: none;
+            border-radius: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            background-color: var(--white);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(230,126,34,0.15);
+        }
+        .service-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .service-card .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card .btn-sm {
+            margin-top: auto;
+            align-self: flex-start;
+            background-color: transparent;
+            border: 1px solid #1e4a6b;
+            color: #1e4a6b;
+            transition: all 0.2s;
+        }
+        .service-card .btn-sm:hover {
+            background: linear-gradient(135deg, #1e4a6b, #2e6f95);
+            color: white;
+            border-color: #1e4a6b;
+                }
+        .testimonial-card {
+            border-left: 4px solid var(--primary-gold);
+            background-color: var(--gray-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        .testimonial-card:hover {
+            transform: translateX(5px);
+        }
+        .contact-form {
+            background-color: var(--gray-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        .contact-form.highlight {
+            box-shadow: 0 0 0 4px var(--primary-gold), 0 10px 25px rgba(0,0,0,0.1);
+            transform: scale(1.01);
+        }
+        footer {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1e4a6b 100%);
+            color: white;
+            padding: 2rem 0;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.75rem;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: var(--primary-gold);
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+    /* Cambiar ícono del menú hamburguesa a blanco */
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+/* Opcional: quitar el borde gris del botón para que se vea más limpio */
+.navbar-toggler {
+    border: none;
+}
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">OPG <span>OpenGaPpa</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#quienes">Quiénes somos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonios">Testimonios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero / Inicio -->
+<section id="inicio" class="hero">
+    <div class="container text-center">
+        <h1>Tu socio tecnológico para hacer crecer tu negocio sin complicaciones</h1>
+        <p class="lead">
+            En OpenGaPpa te ayudamos a ordenar, mejorar y digitalizar tu empresa paso a paso. 
+            Diseñamos e implementamos soluciones tecnológicas a tu medida, para que trabajes mejor, tomes decisiones con claridad y te enfoques en hacer crecer tu negocio.
+        </p>
+        <a href="#contacto" class="btn btn-gold mt-3">Conversemos sobre tu negocio</a>
+    </div>
+</section>
+
+<!-- Quiénes somos -->
+<section id="quienes" class="py-5">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="section-title">Quiénes somos</h2>
+                <p class="section-subtitle">Personas que entienden tu negocio y te ayudan a mejorarlo</p>
+                <p>Somos una consultora tecnológica que acompaña a empresas y emprendedores en su camino digital. Más que implementar herramientas, te ayudamos a ordenar tus procesos, aprovechar mejor tu información y tomar decisiones con mayor claridad.</p>
+                <p>Trabajamos contigo de forma cercana, entendiendo tu realidad y proponiendo soluciones simples, efectivas y adaptadas a lo que realmente necesitas para crecer.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Servicios con modales detallados -->
+<section id="servicios" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-title">Nuestros servicios</h2>
+            <p class="section-subtitle">Soluciones a tu medida</p>
+        </div>
+        <div class="row g-4">
+            <!-- Servicio 1: Ventas e Inventarios -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card service-card h-100">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=60" class="card-img-top service-img" alt="Consultoría estratégica">
+                    <div class="card-body">
+                        <i class="fas fa-boxes-stacked fa-2x mb-3" style="color: var(--primary-gold);"></i>
+                        <h5 class="card-title">Ventas e Inventarios</h5>
+                        <p class="card-text">Desarrollamos sistemas digitales para gestionar ventas, stock e inventarios en tiempo real.</p>
+                        <button class="btn btn-sm btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#modalEstrategica">Saber más →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 2: Desarrollo Web -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card service-card h-100">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=60" class="card-img-top service-img" alt="Transformación digital">
+                    <div class="card-body">
+                        <i class="fas fa-laptop-code fa-2x mb-3" style="color: var(--primary-gold);"></i>
+                        <h5 class="card-title">Desarrollo Web</h5>
+                        <p class="card-text">Creamos sitios web modernos y optimizados para mejorar la presencia digital de empresas.</p>
+                        <button class="btn btn-sm btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#modalDigital">Saber más →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 3: Análisis de datos -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card service-card h-100">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top service-img" alt="Análisis de datos">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line fa-2x mb-3" style="color: var(--primary-gold);"></i>
+                        <h5 class="card-title">Análisis de datos</h5>
+                        <p class="card-text">Convertimos datos en insights accionables para tomar mejores decisiones comerciales.</p>
+                        <button class="btn btn-sm btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#modalDatos">Saber más →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 4: Consultoría TI -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card service-card h-100">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=60" class="card-img-top service-img" alt="Marketing y ventas">
+                    <div class="card-body">
+                        <i class="fas fa-lightbulb fa-2x mb-3" style="color: var(--primary-gold);"></i>
+                        <h5 class="card-title">Consultoría TI</h5>
+                        <p class="card-text">Asesoramos empresas para optimizar su infraestructura tecnológica y procesos digitales.</p>
+                        <button class="btn btn-sm btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#modalMarketing">Saber más →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 5: Cámaras de Seguridad -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card service-card h-100">
+                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=60" class="card-img-top service-img" alt="Optimización de procesos">
+                    <div class="card-body">
+                        <i class="fas fa-video fa-2x mb-3" style="color: var(--primary-gold);"></i>
+                        <h5 class="card-title">Cámaras de Seguridad</h5>
+                        <p class="card-text"><p>Instalamos sistemas de videovigilancia con monitoreo remoto y tecnología moderna.</p>
+</p>
+                        <button class="btn btn-sm btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#modalProcesos">Saber más →</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Servicio 6: Reparación de PC -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card service-card h-100">
+                    <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=800&q=60" class="card-img-top service-img" alt="Capacitación empresarial">
+                    <div class="card-body">
+                        <i class="fas fa-screwdriver-wrench fa-2x mb-3" style="color: var(--primary-gold);"></i>
+                        <h5 class="card-title">Reparación de PC</h5>
+                        <p class="card-text">Diagnóstico, mantenimiento y reparación de computadores para empresas y emprendedores.</p>
+                        <button class="btn btn-sm btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#modalReparacionPC">Saber más →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MODALES DE SERVICIOS ========== -->
+
+<!-- Modal Ventas e Inventarios -->
+<div class="modal fade" id="modalEstrategica" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fas fa-chart-line me-2"></i>Ventas e Inventarios</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Te ayudamos a tomar el control de tus ventas y tu inventario de forma simple y ordenada. Implementamos soluciones que te permiten saber qué estás vendiendo, qué tienes disponible y qué necesitas reponer, sin depender de planillas ni procesos manuales.</p>
+                
+                <h6 class="mt-3">🔹 Beneficios clave</h6>
+                <ul>
+                    <li>Control claro y actualizado de tus ventas diarias.</li>
+                    <li>Visualización de stock en tiempo real.</li>
+                    <li>Reducción de pérdidas por errores o desorden.</li>
+                    <li>Mejor planificación de compras y reposición.</li>
+                </ul>
+
+                <h6>🎯 Ideal para</h6>
+                <p>Negocios que necesitan ordenar sus operaciones, evitar quiebres de stock y tomar decisiones con información confiable.</p>
+
+                <div class="alert alert-warning mt-3">📈 Resultado típico: mayor control del negocio, menos pérdidas y decisiones más acertadas.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-gold service-request-btn" data-service="Ventas e Inventarios">Solicitar este servicio →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Desarrollo Web -->
+<div class="modal fade" id="modalDigital" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fas fa-laptop-code me-2"></i>Desarrollo Web</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Creamos sitios web claros, modernos y pensados para tu negocio. No se trata solo de “estar en internet”, sino de mostrar lo que haces, generar confianza y facilitar que tus clientes te contacten o compren.</p>
+                
+                <h6 class="mt-3">🔹 Beneficios clave</h6>
+                <ul>
+                    <li>Presencia profesional que genera confianza.</li>
+                    <li>Sitios rápidos, adaptados a celulares y fáciles de usar.</li>
+                    <li>Mejor visibilidad en buscadores (Google).</li>
+                    <li>Canales claros para contacto, ventas o consultas.</li>
+                </ul>
+
+                <h6>🎯 Ideal para</h6>
+                <p>Empresas y emprendedores que necesitan dar el salto digital o mejorar su sitio actual para atraer más clientes.</p>
+
+                <div class="alert alert-warning mt-3">🌐 Resultado típico: más consultas, mayor visibilidad y mejor percepción de tu negocio.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-gold service-request-btn" data-service="Desarrollo Web">Solicitar este servicio →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Análisis de Datos -->
+<div class="modal fade" id="modalDatos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fas fa-chart-bar me-2"></i>Análisis de datos</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Convertimos datos sin estructura en información valiosa para la toma de decisiones. Implementamos dashboards, modelos predictivos y reportes a medida.</p>
+                <h6 class="mt-3">🔹 Beneficios clave</h6>
+                <ul>
+                    <li>Visualización de KPIs en tiempo real.</li>
+                    <li>Identificación de patrones y oportunidades.</li>
+                    <li>Segmentación avanzada de clientes.</li>
+                    <li>Predicción de tendencias y demanda.</li>
+                </ul>
+                <h6>🎯 Ideal para</h6>
+                <p>Empresas con datos sin explotar que quieren basar sus decisiones en hechos y no en intuición.</p>
+                <div class="alert alert-warning mt-3">📊 Resultado típico: Aumento de eficiencia comercial y reducción de incertidumbre.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-gold service-request-btn" data-service="Análisis de datos">Solicitar este servicio →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Consultoria TI -->
+<div class="modal fade" id="modalMarketing" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fas fa-bullhorn me-2"></i>Consultoría TI</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Te ayudamos a optimizar la tecnología de tu empresa para que trabaje a tu favor, no en tu contra. Analizamos tu situación actual y te proponemos mejoras claras y aplicables para ordenar procesos, reducir problemas y avanzar con mayor seguridad.</p>
+                
+                <h6 class="mt-3">🔹 Beneficios clave</h6>
+                <ul>
+                    <li>Diagnóstico claro de tu infraestructura y procesos digitales.</li>
+                    <li>Identificación de ineficiencias y oportunidades de mejora.</li>
+                    <li>Recomendaciones prácticas, sin complejidad innecesaria.</li>
+                    <li>Mayor control, seguridad y estabilidad en tus sistemas.</li>
+                </ul>
+
+                <h6>🎯 Ideal para</h6>
+                <p>Empresas que sienten desorden en su tecnología, tienen sistemas poco integrados o necesitan tomar mejores decisiones digitales.</p>
+
+                <div class="alert alert-warning mt-3">💡 Resultado típico: procesos más ordenados, menos errores y una base tecnológica más sólida para crecer.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-gold service-request-btn" data-service="Consultoría TI">Solicitar este servicio →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cámaras de Seguridad -->
+<div class="modal fade" id="modalProcesos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fas fa-cogs me-2"></i>Cámaras de Seguridad</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Protege tu negocio con sistemas de videovigilancia modernos y fáciles de usar. Instalamos cámaras que te permiten monitorear en tiempo real desde tu celular o computador, estés donde estés.</p>
+                
+                <h6 class="mt-3">🔹 Beneficios clave</h6>
+                <ul>
+                    <li>Monitoreo en tiempo real desde cualquier lugar.</li>
+                    <li>Mayor control sobre lo que ocurre en tu negocio.</li>
+                    <li>Prevención de robos y situaciones de riesgo.</li>
+                    <li>Registro de eventos para mayor respaldo y tranquilidad.</li>
+                </ul>
+
+                <h6>🎯 Ideal para</h6>
+                <p>Locales comerciales, bodegas, oficinas o cualquier negocio que necesite mayor seguridad y control operativo.</p>
+
+                <div class="alert alert-warning mt-3">🔒 Resultado típico: mayor tranquilidad, mejor control y reducción de riesgos en el día a día.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-gold service-request-btn" data-service="Cámaras de Seguridad">Solicitar este servicio →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Reparación de PC -->
+<div class="modal fade" id="modalReparacionPC" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fas fa-chalkboard-user me-2"></i>Reparación de PC</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Mantenemos tus computadores funcionando de forma óptima para que tu negocio no se detenga. Detectamos fallas, realizamos mantenimiento y solucionamos problemas de manera rápida y confiable.</p>
+                
+                <h6 class="mt-3">🔹 Beneficios clave</h6>
+                <ul>
+                    <li>Diagnóstico claro y solución efectiva.</li>
+                    <li>Mantenimiento preventivo para evitar fallas futuras.</li>
+                    <li>Mejora del rendimiento de equipos lentos.</li>
+                    <li>Reducción de interrupciones en tu operación diaria.</li>
+                </ul>
+
+                <h6>🎯 Ideal para</h6>
+                <p>Empresas y emprendedores que dependen de sus computadores y necesitan continuidad operativa sin problemas técnicos.</p>
+
+                <div class="alert alert-warning mt-3">💻 Resultado típico: equipos más rápidos, menos fallas y mayor continuidad en el trabajo.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-gold service-request-btn" data-service="Reparación de PC">Solicitar este servicio →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonios -->
+<section id="testimonios" class="py-5">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-subtitle">Experiencias reales de empresas que confiaron en nosotros</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left fa-2x mb-3" style="color: var(--primary-gold); opacity: 0.8;"></i>
+                    <p>"Gracias a OpenGaPpa, logramos implementar un sistema CRM que nos permitió aumentar nuestras ventas en un 35% en solo seis meses. Su equipo es excelente."</p>
+                    <div class="mt-3 fw-bold">— María González, Directora Comercial</div>
+                    <div class="small">TechSolutions</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left fa-2x mb-3" style="color: var(--primary-gold); opacity: 0.8;"></i>
+                    <p>"La asesoría en transformación digital fue clave para nuestra evolución. Pasamos de procesos manuales a una gestión 100% digital con resultados increíbles."</p>
+                    <div class="mt-3 fw-bold">— Carlos Ruiz, CEO</div>
+                    <div class="small">Innova Consulting</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left fa-2x mb-3" style="color: var(--primary-gold); opacity: 0.8;"></i>
+                    <p>"Su enfoque personalizado y su conocimiento del mercado para crear nuestro sitio webnos ayudaron a reposicionar nuestra marca y a conquistar nuevos mercados."</p>
+                    <div class="mt-3 fw-bold">— Ana Belén Torres, Gerente de Marketing</div>
+                    <div class="small">Global Retail</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contacto con Web3Forms integrado (envío asíncrono + redirección) -->
+<section id="contacto" class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center">
+                    <h2 class="section-title">Contáctanos</h2>
+                    <p class="section-subtitle">Cuéntanos tu proyecto y te asesoraremos sin compromiso</p>
+                </div>
+                <div class="contact-form" id="contactFormContainer">
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+                        <input type="hidden" name="access_key" value="89c69b80-22ac-4b57-bfb8-410aa35b1c70">
+                        <!-- Campo oculto para el servicio, se llena con JS -->
+                        <input type="hidden" name="servicio_interes" id="servicioInteres" value="">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre completo" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Correo electrónico" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="tel" class="form-control" name="telefono" id="telefono" placeholder="Teléfono (opcional)">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" name="mensaje" id="mensaje" rows="4" placeholder="Cuéntanos tu consulta o proyecto..." required></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-gold px-5" id="submitBtn">Enviar mensaje</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="formStatus" class="mt-3 text-center" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <div class="social-icons mb-3">
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <p>&copy; 2026 OpenGaPpa Consultora. Todos los derechos reservados.</p>
+        <p class="small mb-0">consultoria.opengappa@gmail.com | +56 9 7137 5871 / +56 9 9234 9504</p>
+    </div>
+</footer>
+
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/56912345678?text=Hola%21%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios." 
+   class="whatsapp-float" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Smooth scroll con offset dinámico (considera menú abierto en móvil)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (!target) return;
+
+            const navCollapse = document.querySelector('.navbar-collapse');
+            const isMenuOpen = navCollapse && navCollapse.classList.contains('show');
+            
+            if (isMenuOpen) {
+                const bsCollapse = new bootstrap.Collapse(navCollapse);
+                bsCollapse.hide();
+                setTimeout(() => {
+                    const offset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+            } else {
+                const offset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Botones de solicitud de servicio (cierran modal y llevan al formulario)
+    const requestBtns = document.querySelectorAll('.service-request-btn');
+    const servicioInput = document.getElementById('servicioInteres');
+    const contactSection = document.getElementById('contacto');
+    const contactFormContainer = document.getElementById('contactFormContainer');
+
+    requestBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceName = this.getAttribute('data-service');
+            // Cerrar el modal actual
+            const modal = this.closest('.modal');
+            const bsModal = bootstrap.Modal.getInstance(modal);
+            bsModal.hide();
+            
+            // Esperar a que el modal termine de cerrarse
+            setTimeout(() => {
+                // Rellenar el campo oculto con el servicio seleccionado
+                if (servicioInput) {
+                    servicioInput.value = `Interesado en: ${serviceName}`;
+                }
+                // Hacer scroll al formulario
+                if (contactSection) {
+                    const offset = 80;
+                    const elementPosition = contactSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+                // Resaltar el formulario para llamar la atención
+                if (contactFormContainer) {
+                    contactFormContainer.classList.add('highlight');
+                    setTimeout(() => {
+                        contactFormContainer.classList.remove('highlight');
+                    }, 2000);
+                }
+            }, 200);
+        });
+    });
+
+    // Web3Forms: envío asíncrono con feedback y redirección a gracias.html
+    const form = document.getElementById('contactForm');
+    const statusDiv = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '⏳ Enviando...';
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = '<div class="alert alert-info">⏳ Enviando mensaje...</div>';
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    statusDiv.innerHTML = '<div class="alert alert-success">✅ ¡Mensaje enviado con éxito! Redirigiendo...</div>';
+                    form.reset();
+                    // Limpiar campo oculto del servicio
+                    if (servicioInput) servicioInput.value = '';
+                    setTimeout(() => {
+                        window.location.href = 'gracias.html';
+                    }, 2000);
+                } else {
+                    statusDiv.innerHTML = '<div class="alert alert-danger">❌ Hubo un error. Por favor, inténtalo de nuevo.</div>';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Enviar mensaje';
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="alert alert-danger">❌ Error de conexión. Revisa tu internet.</div>';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Enviar mensaje';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
